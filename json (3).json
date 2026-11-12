@@ -1,9 +1,9 @@
 {
-  "title": "Атмосфера ҳавосининг ифлосланиши ва уни санитария жиҳатидан муҳофаза қилиш",
-  "subtitle": "Тезкор савол-жавоблар",
+  "title": "Dispeptik sindrom",
+  "subtitle": "Tezkor savol-javoblar",
   "institution": "",
-  "teacher": "Муборак Тўхтаева",
-  "chooseText": "Ўзингиз ёқтирган қуёнчани танланг",
+  "teacher": "Muborak To'xtaeva",
+  "chooseText": "O'zingiz yoqtirgan quyonchani tanlang",
   "timer": 0,
   "teams": 0,
   "hideUsed": true,
@@ -11,39 +11,104 @@
   "voice": true,
   "questions": [
     {
-      "q": "Атмосфера нима?",
-      "a": "Ерни ўраб турган газлар қатлами.",
-      "audio": "audio/q1.mp3?v=atm2"
+      "q": "Dispeptik sindrom nima?",
+      "a": "Dispeptik sindrom — ovqat hazm qilish bilan bog'liq shikoyat va belgilar majmuasi bo'lib, asosan oshqozon va o'n ikki barmoqli ichak faoliyati bilan bog'liq.",
+      "audio": "audio/q1.mp3?v=disp1"
     },
     {
-      "q": "Атмосфера ҳавосининг ифлосланиши нима?",
-      "a": "Ҳавода зарарли моддаларнинг меъёридан ортиқ тўпланиши.",
-      "audio": "audio/q2.mp3?v=atm2"
+      "q": "Dispepsiyaning asosiy belgilari qaysilar?",
+      "a": "Qorinning yuqori qismida og'riq yoki noqulaylik, ovqatdan keyin og'irlik, tez to'yib qolish, qorin dam bo'lishi, ko'ngil aynishi va kekirish.",
+      "audio": "audio/q2.mp3?v=disp1"
     },
     {
-      "q": "Ҳавонинг асосий ифлосланиш манбалари қайсилар?",
-      "a": "Автомобиллар, саноат корхоналари, иситиш тизимлари ва табиий ҳодисалар.",
-      "audio": "audio/q3.mp3?v=atm2"
+      "q": "Dispeptik sindrom nima sababdan kelib chiqadi?",
+      "a": "Oshqozon harakatining buzilishi, oshqozon shilliq qavati kasalliklari, ovqatlanishdagi xatolar va ayrim dorilar ta'siri sababli kelib chiqishi mumkin.",
+      "audio": "audio/q3.mp3?v=disp1"
     },
     {
-      "q": "РЭК нима?",
-      "a": "Зарарли моддаларнинг рухсат этилган концентрацияси.",
-      "audio": "audio/q4.mp3?v=atm2"
+      "q": "Funksional dispepsiya nima?",
+      "a": "Tekshiruvlarda shikoyatlarni tushuntiradigan aniq organik kasallik topilmasa-da, hazm bilan bog'liq belgilar kuzatilishidir.",
+      "audio": "audio/q4.mp3?v=disp1"
     },
     {
-      "q": "Ҳаво ифлосланиши қайси аъзоларга кўпроқ таъсир қилади?",
-      "a": "Нафас олиш ва юрак-қон томир тизимларига.",
-      "audio": "audio/q5.mp3?v=atm2"
+      "q": "Organik dispepsiya nima?",
+      "a": "Gastrit, oshqozon yarasi yoki boshqa aniqlangan kasalliklar bilan bog'liq dispeptik belgilardir.",
+      "audio": "audio/q5.mp3?v=disp1"
     },
     {
-      "q": "Ҳавони ифлосланишдан қандай ҳимоя қилиш мумкин?",
-      "a": "Фильтрлар ўрнатиш, чиқиндиларни камайтириш ва кўкаламзорлаштириш орқали.",
-      "audio": "audio/q6.mp3?v=atm2"
+      "q": "Jig'ildon qaynashi nima?",
+      "a": "Oshqozonning kislotali tarkibi qizilo'ngachga qaytishi natijasida ko'krak suyagi ortida achishish paydo bo'lishidir.",
+      "audio": "audio/q6.mp3?v=disp1"
     },
     {
-      "q": "Санитария-ҳимоя зонаси нима?",
-      "a": "Саноат корхонаси билан аҳоли яшаш ҳудуди ўртасида ташкил этиладиган муҳофаза ҳудуди.",
-      "audio": "audio/q7.mp3?v=atm2"
+      "q": "Helicobacter pylori nima?",
+      "a": "Oshqozonda yashay oladigan, gastrit va yara kasalligiga sabab bo'lishi mumkin bo'lgan bakteriya.",
+      "audio": "audio/q7.mp3?v=disp1"
+    },
+    {
+      "q": "Dispepsiyada qanday tekshiruvlar o'tkaziladi?",
+      "a": "Shifokor bemorning holatiga qarab qon tahlili, najas tahlili, Helicobacter pylori tekshiruvi, gastroskopiya va zarur hollarda qorin bo'shlig'i ultratovush tekshiruvini belgilaydi.",
+      "audio": "audio/q8.mp3?v=disp1"
+    },
+    {
+      "q": "Gastroskopiya nima?",
+      "a": "Maxsus optik asbob — endoskop yordamida qizilo'ngach, oshqozon va o'n ikki barmoqli ichakni tekshirish usuli.",
+      "audio": "audio/q9.mp3?v=disp1"
+    },
+    {
+      "q": "Dispepsiyani davolash qanday amalga oshiriladi?",
+      "a": "Davolash sababiga qarab olib boriladi. Shifokor kislota kamaytiruvchi dorilar, Helicobacter pylori aniqlansa unga qarshi antibiotikli davolash va boshqa zarur vositalarni buyurishi mumkin.",
+      "audio": "audio/q10.mp3?v=disp1"
+    },
+    {
+      "q": "Dispepsiya bilan kelgan bemordan birinchi navbatda nima so'raladi?",
+      "a": "Og'riqning joyi, davomiyligi, ovqatlanish bilan bog'liqligi, ko'ngil aynishi va qusish bor-yo'qligi aniqlanadi.",
+      "audio": "audio/q11.mp3?v=disp1"
+    },
+    {
+      "q": "Hamshira bemorning qaysi ko'rsatkichlarini nazorat qiladi?",
+      "a": "Arterial qon bosimi, puls, tana harorati, nafas olish va suyuqlik balansini nazorat qiladi.",
+      "audio": "audio/q12.mp3?v=disp1"
+    },
+    {
+      "q": "Bemor qusayotgan bo'lsa, qanday yordam ko'rsatiladi?",
+      "a": "Bemorni xavfsiz yonbosh holatga keltirish, qusuqning nafas yo'llariga tushishining oldini olish va shifokorga xabar berish kerak.",
+      "audio": "audio/q13.mp3?v=disp1"
+    },
+    {
+      "q": "Qusish natijasida qanday asoratlar yuzaga kelishi mumkin?",
+      "a": "Suvsizlanish, elektrolitlar muvozanatining buzilishi va qusuqning nafas yo'llariga tushishi — aspiratsiya yuzaga kelishi mumkin.",
+      "audio": "audio/q14.mp3?v=disp1"
+    },
+    {
+      "q": "Dispepsiyada ovqatlanish tartibi qanday bo'lishi kerak?",
+      "a": "Oz-ozdan, kuniga bir necha marta, bemor ko'tara oladigan ovqatlar iste'mol qilinadi. Belgilarni kuchaytiradigan yog'li, qovurilgan, achchiq ovqatlar va gazli ichimliklar cheklanadi.",
+      "audio": "audio/q15.mp3?v=disp1"
+    },
+    {
+      "q": "Hamshiralik parvarishining asosiy maqsadi nima?",
+      "a": "Bemor ahvolini yaxshilash, asoratlarning oldini olish va davolash jarayonida yordam berish. Hamshira bemorni kuzatadi, ovqatlanishini nazorat qiladi va shifokor ko'rsatmalarini bajaradi.",
+      "audio": "audio/q16.mp3?v=disp1"
+    },
+    {
+      "q": "Qusuqda qon bo'lsa, bu nimadan darak beradi va nima qilish kerak?",
+      "a": "Bu oshqozon-ichak yo'llaridan qon ketishi ehtimolini ko'rsatadi. Zudlik bilan shifokor chaqirish, bemorni xavfsiz holatga keltirish, hayotiy ko'rsatkichlarini kuzatish va shoshilinch yordamga tayyorlash kerak.",
+      "audio": "audio/q17.mp3?v=disp1"
+    },
+    {
+      "q": "Qora rangli najas nimaning belgisi bo'lishi mumkin?",
+      "a": "Oshqozon yoki yuqori hazm yo'llaridan qon ketish belgisi bo'lishi mumkin.",
+      "audio": "audio/q18.mp3?v=disp1"
+    },
+    {
+      "q": "Bemorda suvsizlanish qanday belgilar bilan namoyon bo'ladi?",
+      "a": "Og'iz qurishi, chanqash, siydik kamayishi, holsizlik va bosh aylanishi kuzatilishi mumkin.",
+      "audio": "audio/q19.mp3?v=disp1"
+    },
+    {
+      "q": "Qaysi belgilar shoshilinch tibbiy baholashni talab qiladi?",
+      "a": "Qon aralash qusish, qora najas, kuchli va to'satdan boshlangan qorin og'rig'i, hushdan ketish hamda suvsizlanish. Sababsiz ozib ketish va yutish qiyinlashishi ham shifokor tekshiruvini talab qiladi.",
+      "audio": "audio/q20.mp3?v=disp1"
     }
   ]
 }
