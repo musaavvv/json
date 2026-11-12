@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dispeptik sindrom — Sil Quyonchalar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f0c29;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      color: #fff;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeDown 0.8s ease;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255,200,0,0.5);
+      margin-bottom: 6px;
+    }
+    .header p {
+      font-size: 1rem;
+      color: #ccc;
+      opacity: 0.8;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #f7971e, #ffd200);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-wrap {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 20px;
+      animation: fadeDown 0.9s ease;
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+    .progress-bar-bg {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      height: 10px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f7971e, #ffd200);
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+
+    /* ===== SCORE ===== */
+    .score-box {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      animation: fadeDown 1s ease;
+    }
+    .score-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 10px 20px;
+      text-align: center;
+      min-width: 90px;
+    }
+    .score-item .num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffd200;
+    }
+    .score-item .lbl {
+      font-size: 0.72rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== QUESTION CARD ===== */
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 32px 36px;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,210,0,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .question-num {
+      font-size: 0.8rem;
+      color: #ffd200;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .question-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    /* ===== ANSWER BOX ===== */
+    .answer-box {
+      background: rgba(255,210,0,0.08);
+      border: 1px solid rgba(255,210,0,0.25);
+      border-radius: 14px;
+      padding: 18px 22px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #ffe97a;
+      text-align: left;
+      display: none;
+      animation: slideUp 0.4s ease;
+    }
+    .answer-box.show { display: block; }
+    .answer-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #ffd200;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: none;
+      border-radius: 50px;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn-show {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(255,210,0,0.35);
+    }
+    .btn-show:hover { box-shadow: 0 6px 28px rgba(255,210,0,0.55); transform: translateY(-2px); }
+    .btn-next {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(102,126,234,0.35);
+    }
+    .btn-next:hover { box-shadow: 0 6px 28px rgba(102,126,234,0.55); transform: translateY(-2px); }
+    .btn-prev {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-prev:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+    .btn-restart {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(56,239,125,0.35);
+    }
+    .btn-restart:hover { box-shadow: 0 6px 28px rgba(56,239,125,0.55); transform: translateY(-2px); }
+
+    /* ===== FINISH SCREEN ===== */
+    .finish-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1);
+    }
+    .finish-screen.show { display: flex; }
+    .finish-emoji { font-size: 5rem; margin-bottom: 16px; }
+    .finish-title { font-size: 2.2rem; font-weight: 800; color: #ffd200; margin-bottom: 10px; }
+    .finish-sub { font-size: 1rem; color: #ccc; margin-bottom: 30px; }
+    .finish-stats {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 18px 28px;
+      min-width: 110px;
+    }
+    .stat-box .n { font-size: 2rem; font-weight: 800; color: #ffd200; }
+    .stat-box .l { font-size: 0.75rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ===== START SCREEN ===== */
+    .start-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1);
+    }
+    .start-screen.hide { display: none; }
+    .rabbit { font-size: 6rem; margin-bottom: 16px; animation: bounce 1.5s ease infinite; }
+    .start-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .start-sub { font-size: 1rem; color: #ccc; margin-bottom: 10px; }
+    .start-teacher { font-size: 0.9rem; color: #ffd200; margin-bottom: 30px; opacity: 0.9; }
+    .info-chips {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .chip {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: #ddd;
+    }
+    .btn-start {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #000;
+      font-size: 1.1rem;
+      padding: 14px 44px;
+      border-radius: 50px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 30px rgba(255,210,0,0.4);
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+    .btn-start:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,210,0,0.55); }
+    .btn-start:active { transform: scale(0.97); }
+
+    /* ===== GAME AREA ===== */
+    .game-area {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .game-area.show { display: flex; }
+
+    /* ===== DOTS ===== */
+    .dots-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      max-width: 700px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #aaa;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.current {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      border-color: #ffd200;
+      color: #000;
+      transform: scale(1.15);
+    }
+    .dot.seen {
+      background: rgba(102,126,234,0.4);
+      border-color: rgba(102,126,234,0.6);
+      color: #fff;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 500px) {
+      .header h1 { font-size: 1.4rem; }
+      .card { padding: 22px 18px; }
+      .question-text { font-size: 1.1rem; }
+      .finish-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== START SCREEN ========== -->
+<div class="start-screen" id="startScreen">
+  <div class="rabbit">🐇</div>
+  <div class="start-title">Dispeptik sindrom</div>
+  <div class="start-sub">Tezkor savol-javoblar o'yini</div>
+  <div class="start-teacher">👩‍⚕️ Muborak To'xtaeva</div>
+  <div class="info-chips">
+    <div class="chip">📋 20 ta savol</div>
+    <div class="chip">🏥 Tibbiyot</div>
+    <div class="chip">🐇 Sil Quyonchalar</div>
+  </div>
+  <button class="btn-start" onclick="startGame()">▶ O'yinni boshlash</button>
+</div>
+
+<!-- ========== GAME AREA ========== -->
+<div class="game-area" id="gameArea">
+
+  <div class="header">
+    <h1>🐇 Dispeptik sindrom</h1>
+    <p>Tezkor savol-javoblar</p>
+    <div class="badge">Sil Quyonchalar</div>
+  </div>
+
+  <div class="score-box">
+    <div class="score-item">
+      <div class="num" id="seenCount">0</div>
+      <div class="lbl">Ko'rildi</div>
+    </div>
+    <div class="score-item">
+      <div class="num" id="totalCount">20</div>
+      <div class="lbl">Jami</div>
+    </div>
+    <div class="score-item">
+      <div class="num" id="leftCount">20</div>
+      <div class="lbl">Qoldi</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span id="progressText">Savol 1 / 20</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="dots-wrap" id="dotsWrap"></div>
+
+  <div class="card" id="questionCard">
+    <div class="question-num" id="qNum">SAVOL 1</div>
+    <div class="question-text" id="qText"></div>
+    <div class="answer-box" id="answerBox">
+      <div class="answer-label">✅ Javob</div>
+      <div id="answerText"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-prev" onclick="prevQ()">◀ Oldingi</button>
+      <button class="btn btn-show" id="showBtn" onclick="showAnswer()">💡 Javobni ko'rsat</button>
+      <button class="btn btn-next" onclick="nextQ()">Keyingi ▶</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== FINISH SCREEN ========== -->
+<div class="finish-screen" id="finishScreen">
+  <div class="finish-emoji">🎉</div>
+  <div class="finish-title">Barakallo!</div>
+  <div class="finish-sub">Barcha savollar ko'rib chiqildi</div>
+  <div class="finish-stats">
+    <div class="stat-box">
+      <div class="n">20</div>
+      <div class="l">Savol</div>
+    </div>
+    <div class="stat-box">
+      <div class="n">✔</div>
+      <div class="l">Bajarildi</div>
+    </div>
+  </div>
+  <button class="btn btn-restart" onclick="restartGame()">🔄 Qayta boshlash</button>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "Dispeptik sindrom nima?",
+      a: "Dispeptik sindrom — ovqat hazm qilish bilan bog'liq shikoyat va belgilar majmuasi bo'lib, asosan oshqozon va o'n ikki barmoqli ichak faoliyati bilan bog'liq."
+    },
+    {
+      q: "Dispepsiyaning asosiy belgilari qaysilar?",
+      a: "Qorinning yuqori qismida og'riq yoki noqulaylik, ovqatdan keyin og'irlik, tez to'yib qolish, qorin dam bo'lishi, ko'ngil aynishi va kekirish."
+    },
+    {
+      q: "Dispeptik sindrom nima sababdan kelib chiqadi?",
+      a: "Oshqozon harakatining buzilishi, oshqozon shilliq qavati kasalliklari, ovqatlanishdagi xatolar va ayrim dorilar ta'siri sababli kelib chiqishi mumkin."
+    },
+    {
+      q: "Funksional dispepsiya nima?",
+      a: "Tekshiruvlarda shikoyatlarni tushuntiradigan aniq organik kasallik topilmasa-da, hazm bilan bog'liq belgilar kuzatilishidir."
+    },
+    {
+      q: "Organik dispepsiya nima?",
+      a: "Gastrit, oshqozon yarasi yoki boshqa aniqlangan kasalliklar bilan bog'liq dispeptik belgilardir."
+    },
+    {
+      q: "Jig'ildon qaynashi nima?",
+      a: "Oshqozonning kislotali tarkibi qizilo'ngachga qaytishi natijasida ko'krak suyagi ortida achishish paydo bo'lishidir."
+    },
+    {
+      q: "Helicobacter pylori nima?",
+      a: "Oshqozonda yashay oladigan, gastrit va yara kasalligiga sabab bo'lishi mumkin bo'lgan bakteriya."
+    },
+    {
+      q: "Dispepsiyada qanday tekshiruvlar o'tkaziladi?",
+      a: "Shifokor bemorning holatiga qarab qon tahlili, najas tahlili, Helicobacter pylori tekshiruvi, gastroskopiya va zarur hollarda qorin bo'shlig'i ultratovush tekshiruvini belgilaydi."
+    },
+    {
+      q: "Gastroskopiya nima?",
+      a: "Maxsus optik asbob — endoskop yordamida qizilo'ngach, oshqozon va o'n ikki barmoqli ichakni tekshirish usuli."
+    },
+    {
+      q: "Dispepsiyani davolash qanday amalga oshiriladi?",
+      a: "Davolash sababiga qarab olib boriladi. Shifokor kislota kamaytiruvchi dorilar, Helicobacter pylori aniqlansa unga qarshi antibiotikli davolash va boshqa zarur vositalarni buyurishi mumkin. Antibiotiklar barcha bemorlarga berilmaydi."
+    },
+    {
+      q: "Dispepsiya bilan kelgan bemordan birinchi navbatda nima so'raladi?",
+      a: "Og'riqning joyi, davomiyligi, ovqatlanish bilan bog'liqligi, ko'ngil aynishi va qusish bor-yo'qligi aniqlanadi."
+    },
+    {
+      q: "Hamshira bemorning qaysi ko'rsatkichlarini nazorat qiladi?",
+      a: "Arterial qon bosimi, puls, tana harorati, nafas olish va suyuqlik balansini nazorat qiladi."
+    },
+    {
+      q: "Bemor qusayotgan bo'lsa, qanday yordam ko'rsatiladi?",
+      a: "Bemorni xavfsiz yonbosh holatga keltirish, qusuqning nafas yo'llariga tushishining oldini olish va shifokorga xabar berish kerak."
+    },
+    {
+      q: "Qusish natijasida qanday asoratlar yuzaga kelishi mumkin?",
+      a: "Suvsizlanish, elektrolitlar muvozanatining buzilishi va qusuqning nafas yo'llariga tushishi — aspiratsiya yuzaga kelishi mumkin."
+    },
+    {
+      q: "Dispepsiyada ovqatlanish tartibi qanday bo'lishi kerak?",
+      a: "Oz-ozdan, kuniga bir necha marta, bemor ko'tara oladigan ovqatlar iste'mol qilinadi. Belgilarni kuchaytiradigan yog'li, qovurilgan, achchiq ovqatlar va gazli ichimliklar cheklanadi."
+    },
+    {
+      q: "Hamshiralik parvarishining asosiy maqsadi nima?",
+      a: "Bemor ahvolini yaxshilash, asoratlarning oldini olish va davolash jarayonida yordam berish. Hamshira bemorni kuzatadi, ovqatlanishini nazorat qiladi va shifokor ko'rsatmalarini bajaradi."
+    },
+    {
+      q: "Qusuqda qon bo'lsa, bu nimadan darak beradi va nima qilish kerak?",
+      a: "Bu oshqozon-ichak yo'llaridan qon ketishi ehtimolini ko'rsatadi. Zudlik bilan shifokor chaqirish, bemorni xavfsiz holatga keltirish, hayotiy ko'rsatkichlarini kuzatish va shoshilinch yordamga tayyorlash kerak."
+    },
+    {
+      q: "Qora rangli najas nimaning belgisi bo'lishi mumkin?",
+      a: "Oshqozon yoki yuqori hazm yo'llaridan qon ketish belgisi bo'lishi mumkin."
+    },
+    {
+      q: "Bemorda suvsizlanish qanday belgilar bilan namoyon bo'ladi?",
+      a: "Og'iz qurishi, chanqash, siydik kamayishi, holsizlik va bosh aylanishi kuzatilishi mumkin."
+    },
+    {
+      q: "Qaysi belgilar shoshilinch yoki kechiktirmasdan tibbiy baholashni talab qiladi?",
+      a: "Qon aralash qusish, qora najas, kuchli va to'satdan boshlangan qorin og'rig'i, hushdan ketish hamda suvsizlanish xavfli belgilar hisoblanadi. Sababsiz ozib ketish va yutish qiyinlashishi ham shifokor tekshiruvini talab qiladi."
+    }
+  ];
+
+  let current = 0;
+  let seen = new Set();
+  let answerVisible = false;
+
+  function startGame() {
+    document.getElementById('startScreen').classList.add('hide');
+    document.getElementById('gameArea').classList.add('show');
+    buildDots();
+    loadQ(0);
+  }
+
+  function buildDots() {
+    const wrap = document.getElementById('dotsWrap');
+    wrap.innerHTML = '';
+    questions.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot';
+      d.id = 'dot' + i;
+      d.textContent = i + 1;
+      d.onclick = () => loadQ(i);
+      wrap.appendChild(d);
+    });
+  }
+
+  function loadQ(index) {
+    current = index;
+    answerVisible = false;
+
+    const q = questions[current];
+    document.getElementById('qNum').textContent = 'SAVOL ' + (current + 1);
+    document.getElementById('qText').textContent = q.q;
+    document.getElementById('answerText').textContent = q.a;
+    document.getElementById('answerBox').classList.remove('show');
+    document.getElementById('showBtn').style.display = 'inline-block';
+
+    // dots
+    questions.forEach((_, i) => {
+      const d = document.getElementById('dot' + i);
+      d.className = 'dot';
+      if (i === current) d.classList.add('current');
+      else if (seen.has(i)) d.classList.add('seen');
+    });
+
+    updateProgress();
+
+    // card re-animate
+    const card = document.getElementById('questionCard');
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = 'popIn 0.4s cubic-bezier(.34,1.56,.64,1)';
+  }
+
+  function showAnswer() {
+    document.getElementById('answerBox').classList.add('show');
+    document.getElementById('showBtn').style.display = 'none';
+    seen.add(current);
+    updateProgress();
+    // update dot
+    const d = document.getElementById('dot' + current);
+    if (!d.classList.contains('current')) {
+      d.className = 'dot seen';
+    }
+  }
+
+  function nextQ() {
+    if (current < questions.length - 1) {
+      loadQ(current + 1);
+    } else {
+      showFinish();
+    }
+  }
+
+  function prevQ() {
+    if (current > 0) loadQ(current - 1);
+  }
+
+  function updateProgress() {
+    const total = questions.length;
+    const s = seen.size;
+    const pct = Math.round((s / total) * 100);
+    document.getElementById('seenCount').textContent = s;
+    document.getElementById('leftCount').textContent = total - s;
+    document.getElementById('progressText').textContent = `Savol ${current + 1} / ${total}`;
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function showFinish() {
+    document.getElementById('gameArea').classList.remove('show');
+    document.getElementById('finishScreen').classList.add('show');
+  }
+
+  function restartGame() {
+    seen.clear();
+    current = 0;
+    document.getElementById('finishScreen').classList.remove('show');
+    document.getElementById('gameArea').classList.add('show');
+    buildDots();
+    loadQ(0);
+    updateProgress();
+  }
+
+  // keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('gameArea').classList.contains('show')) return;
+    if (e.key === 'ArrowRight') nextQ();
+    if (e.key === 'ArrowLeft') prevQ();
+    if (e.key === ' ') { e.preventDefault(); showAnswer(); }
+  });
+</script>
+
+</body>
+</html>
